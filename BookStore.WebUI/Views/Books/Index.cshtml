@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BookStore.Domain.Entities.Book>
+
+@{
+    ViewBag.Title = "Редактирование: список товаров";
+    Layout = "~/Views/Shared/_BooksLayout.cshtml";
+}
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Cписок книг</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-condensed table-bordered">
+            <tr>
+                <th class="text-right">ID</th>
+                <th>Название</th>
+                <th class="text-right">Цена</th>
+                <th class="text-center">Действия</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-right">@item.BookId</td>
+                    <td>@Html.ActionLink(item.Name, "Edit", new { item.BookId })</td>
+                    <td class="text-right">@item.Price.ToString("# руб")</td>
+                    <td class="text-center">@using (Html.BeginForm("Delete", "Books"))
+                    { 
+                    @Html.Hidden("BookID", item.BookId)
+                        <input type="submit" class="btn btn-default btn-xs" value="Удалить"/>
+
+                    }
+                   
+                </tr>
+            }
+        </table>
+    </div>
+ <div class ="panel-footer">
+ @Html.ActionLink("Добавить книгу", "Create",  new { @class = "btn btn-default"})
+     </div>
+</div>
+
+

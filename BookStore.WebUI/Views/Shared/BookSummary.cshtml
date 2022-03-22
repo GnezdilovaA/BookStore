@@ -12,6 +12,15 @@
             <input type="submit" class="btn btn-success" value="Добавить в корзину" />
         </div>
     }
+    @using (Html.BeginForm("AddToBooks", "Books"))
+    {
+        <div class="pull-right">
+            @Html.HiddenFor(x => x.BookId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="btn btn-success" value="Обновление информации" />
+        </div>
+    }
+    }
     <span class="lead">@Model.Description</span>
     <span class="lead">@Model.Quantity.ToString("# стр")</span>
     <span class="lead">@Model.Author</span>
